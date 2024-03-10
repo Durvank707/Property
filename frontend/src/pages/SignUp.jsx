@@ -52,7 +52,7 @@ const SignUp = () => {
                 <button className='disabled:{loading} bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-90 mt-4'>{loading ? "Loading..." : "Sign Up"}</button>
             </form>
             <div className='flex gap-2 mt-6'>
-                <p>Dont have an account?</p>
+                <p>Have an account?</p>
                 <Link to={"/signin"}>
                     <span className='text-blue-700 font-semibold'>Sign In</span>
                 </Link>
