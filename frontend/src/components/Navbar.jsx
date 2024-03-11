@@ -12,7 +12,7 @@ const Navbar = () => {
                     <span className='text-slate-700'>IT</span>
                 </h1>
                 </Link>
-                <div className='flex gap-10'>
+                <div className='flex gap-5'>
                     <form className='bg-slate-100 p-3 rounded-lg flex items-center'>
                         <input type='text' placeholder='Search here...' className='bg-transparent focus:outline-none w-24 sm:w-64'/>
                         <FaSearch/>
