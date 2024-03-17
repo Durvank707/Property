@@ -4,7 +4,10 @@ const { errorHandler } = require("../utils/error.js");
 
 exports.updateUser = async (req, res, next) => {
     if (req.user.id !== req.params.id)
-        return next(errorHandler(401, 'You can only update your own account!'));
+        return next(res.status(401).json({
+            success: false,
+            message: "User don't match"
+        }));
     try {
         if (req.body.password) {
             req.body.password = bcryptjs.hashSync(req.body.password, 10);
