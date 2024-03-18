@@ -33,3 +33,23 @@ exports.updateUser = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.deleteUser = async(req, res, next)=>{
+    if (req.user.id !== req.params.id)
+        return next(res.status(401).json({
+            success: false,
+            message: "User don't match"
+        }));
+
+    try{
+        await User.findByIdAndDelete(req.params.id)
+        res.clearCookie("access_token");
+        res.status(200).json({
+            success:true,
+            message:"User has been deleted"
+        })
+    }
+    catch(error){
+        next(error)
+    }
+}
