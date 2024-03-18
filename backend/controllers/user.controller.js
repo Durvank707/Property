@@ -34,22 +34,17 @@ exports.updateUser = async (req, res, next) => {
     }
 };
 
-exports.deleteUser = async(req, res, next)=>{
+exports.deleteUser = async (req, res, next) => {
     if (req.user.id !== req.params.id)
         return next(res.status(401).json({
             success: false,
-            message: "User don't match"
+            message: "You can delete only your account"
         }));
-
-    try{
-        await User.findByIdAndDelete(req.params.id)
-        res.clearCookie("access_token");
-        res.status(200).json({
-            success:true,
-            message:"User has been deleted"
-        })
+    try {
+        await User.findByIdAndDelete(req.params.id);
+        res.clearCookie('access_token');
+        res.status(200).json('User has been deleted!');
+    } catch (error) {
+        next(error);
     }
-    catch(error){
-        next(error)
-    }
-}
+};
