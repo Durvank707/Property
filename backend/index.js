@@ -21,9 +21,11 @@ dbConnect()
 
 const userRoutes = require('./routes/user.route.js')
 const authRoutes = require('./routes/auth.route.js')
+const listingRoute = require('./routes/listing.route.js')
 
 app.use("/api/auth",authRoutes)
 app.use("/api/user", userRoutes)
+app.use("/api/listing",listingRoute)
 
 
 app.listen(4000, ()=>{
