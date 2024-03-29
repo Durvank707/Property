@@ -1,6 +1,7 @@
 const User = require("../models/user.model.js");
 const bcryptjs = require('bcryptjs');
 const { errorHandler } = require("../utils/error.js");
+const Listing = require("../models/listing.model.js");
 
 exports.updateUser = async (req, res, next) => {
     if (req.user.id !== req.params.id)
@@ -48,3 +49,19 @@ exports.deleteUser = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.getUserListings = async (req, res, next) => {
+    if (req.user.id === req.params.id) {
+      try {
+        const listings = await Listing.find({ userRef: req.params.id });
+        res.status(200).json(listings);
+      } catch (error) {
+        next(error);
+      }
+    } else {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized permission"
+      })
+    }
+  };
