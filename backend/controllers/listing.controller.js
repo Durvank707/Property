@@ -80,3 +80,18 @@ exports.updateListing = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.getListing = async (req, res, next) => {
+    try {
+        const listing = await Listing.findById(req.params.id);
+        if (!listing) {
+            return res.status(404).json({
+                success: false,
+                message: "Listing not found"
+            });
+        }
+        res.status(200).json(listing);
+    } catch (error) {
+        next(error);
+    }
+};
